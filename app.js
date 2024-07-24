@@ -10,7 +10,7 @@ app.get('/', function (req, res) {
 la latitud y la longitud,donde van los numeros de latitud y longitud ahi tienes que pasar tus valores
 y cuando se los pases en tu programa como esta esa url y llegue al servidor de express este mandara un mensaje en consola
 mostrando los valores de latitud y longitud, con esto comprovamos que si recibimos los datos cada xx tiempo desde el dispositivo
-Nota: cambia el localhost por la ip publica https://nordvpn.com/es-mx/what-is-my-ip/ ahi te dice cual es la ip
+Nota: cambia el localhost por la ip publica https://nordvpn.com/es-mx/what-is-my-ip/ ahi te dice cual es la ip publica
 y solo falta que abras el router (modem) y le digas que tu maquina es un servidor web, como te mostre la vez pasada.
 Con eso ya tu maquina servidor de node con express estara publico a todo internet.
 */
@@ -21,4 +21,4 @@ app.post('/pruebatrack', (req, res) =>{
     return
 })
 
-app.listen(3000)
+app.listen(3000)//este es el puerto del servidor
