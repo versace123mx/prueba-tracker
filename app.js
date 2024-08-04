@@ -29,7 +29,12 @@ y solo falta que abras el router (modem) y le digas que tu maquina es un servido
 Con eso ya tu maquina servidor de node con express estara publico a todo internet.
 */
 app.use('/pruebatrack',routeTraker)
-
+/*
+app.post('/pruebatrack',(req, res) =>{
+    console.log(req.query)
+    return res.send('ok')
+})
+*/
 // Middleware para manejar rutas no encontradas
 app.use((req, res) => {
     res.status(404).json({
