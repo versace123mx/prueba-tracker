@@ -1,5 +1,19 @@
 import express from 'express'
+import dotenv from "dotenv";
+import { dbConecction } from "./database/connection.js";
+import { routeTraker } from "./router/tracker.js"
+
+dotenv.config(); //iniciando variables de entorno
+dbConecction(); //conexion base de datos Mongo
+
 const app = express()
+const puerto = process.env.PUERTO_EXPRESS || 3000;
+
+
+//Convertir body a objeto de js, cuando se mandan datos en postman -> body -> row JSON
+app.use(express.json());
+app.use(express.urlencoded({extended:true}))//para recibir datos desde un formulario si carga de imagenes postman -> body -> x-www-form-urlencoded o form-data
+
 
 // http://localhost:3000   <-> esta ruta en el navegador devuelve Hello Worl por que es por GET
 app.get('/', function (req, res) {
@@ -14,11 +28,16 @@ Nota: cambia el localhost por la ip publica https://nordvpn.com/es-mx/what-is-my
 y solo falta que abras el router (modem) y le digas que tu maquina es un servidor web, como te mostre la vez pasada.
 Con eso ya tu maquina servidor de node con express estara publico a todo internet.
 */
-app.post('/pruebatrack', (req, res) =>{
-    const {latitud , longitud} = req.query
+app.post('/pruebatrack',routeTraker)
 
-    console.log(latitud, longitud)
-    return
-})
+// Middleware para manejar rutas no encontradas
+app.use((req, res) => {
+    res.status(404).json({
+        errors: [{ msg: 'Ruta no encontrada' }]
+    });
+});
 
-app.listen(3000)//este es el puerto del servidor
+//Crear servidor y escuchar peticiones http
+app.listen(puerto, () => {
+    console.log(`El servidor de espress esta funcionando en el puerto ${puerto}`);
+});
