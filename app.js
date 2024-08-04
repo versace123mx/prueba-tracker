@@ -1,7 +1,7 @@
 import express from 'express'
 import dotenv from "dotenv";
 import { dbConecction } from "./database/connection.js";
-import { routeTraker } from "./router/tracker.js"
+import { routeTraker } from "./router/index.js"
 
 dotenv.config(); //iniciando variables de entorno
 dbConecction(); //conexion base de datos Mongo
@@ -28,12 +28,12 @@ Nota: cambia el localhost por la ip publica https://nordvpn.com/es-mx/what-is-my
 y solo falta que abras el router (modem) y le digas que tu maquina es un servidor web, como te mostre la vez pasada.
 Con eso ya tu maquina servidor de node con express estara publico a todo internet.
 */
-app.post('/pruebatrack',routeTraker)
+app.use('/pruebatrack',routeTraker)
 
 // Middleware para manejar rutas no encontradas
 app.use((req, res) => {
     res.status(404).json({
-        errors: [{ msg: 'Ruta no encontrada' }]
+        errors: [{ msg: 'Ruta no encontrada 1' }]
     });
 });
 
